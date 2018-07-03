@@ -32,6 +32,7 @@ def create(request):
     return HttpResponseRedirect('/inscricao/{}/'.format(subscription.pk))
 
 
+
 def new(request):
     context = {'form': SubscriptionForm()}
     return render(request, 'subscriptions/subscription_form.html', context)

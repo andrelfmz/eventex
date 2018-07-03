@@ -1,5 +1,6 @@
 from django.db import models
-from hashid_field import HashidAutoField
+from hashids import Hashids
+hashids = Hashids(salt='Welcome to the Django', min_length=11)
 
 
 
@@ -9,7 +10,7 @@ class Subscription(models.Model):
     email = models.EmailField('e-mail')
     phone = models.CharField('telefone', max_length=20)
     created_at = models.DateTimeField('criado em', auto_now=True)
-    subscription_id = HashidAutoField(primary_key=True)
+    hashid = models.CharField(max_length=11, primary_key=True)
 
     class Meta:
         verbose_name_plural = 'inscrições'
@@ -18,3 +19,7 @@ class Subscription(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.hashid = hashids.encode(int(self.cpf))
+        super(Subscription, self).save(*args, **kwargs)
