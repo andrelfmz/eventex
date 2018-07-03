@@ -1,4 +1,6 @@
 from django.db import models
+from hashid_field import HashidAutoField
+
 
 
 class Subscription(models.Model):
@@ -7,6 +9,7 @@ class Subscription(models.Model):
     email = models.EmailField('e-mail')
     phone = models.CharField('telefone', max_length=20)
     created_at = models.DateTimeField('criado em', auto_now=True)
+    subscription_id = HashidAutoField(primary_key=True)
 
     class Meta:
         verbose_name_plural = 'inscrições'
