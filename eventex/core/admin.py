@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from eventex.core.models import Speaker, Contact, Talk
+from eventex.core.models import Speaker, Contact, Talk, Course
 
 
 class ContactInline(admin.TabularInline):
@@ -31,9 +31,11 @@ class SpeakerModelAdmin(admin.ModelAdmin):
     email.short_description = 'e-mail'
 
     def phone(self, obj):
-        return obj.contact_set.phones.first()
+        pass
+        """return obj.contact_set.phones.first()"""
 
     phone.short_description = 'telefone'
 
 admin.site.register(Speaker, SpeakerModelAdmin)
 admin.site.register(Talk)
+admin.site.register(Course)
